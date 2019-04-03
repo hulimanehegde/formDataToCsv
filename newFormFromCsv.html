@@ -1,0 +1,100 @@
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+ <script> 
+ 	
+
+       function exportData() {
+	   
+	   
+		//var data = JSON.stringify(jQuery('#contact-form').serializeArray());
+		//var data = JSON.parse($("#contact-form").serializeArray());
+        var data = $("#contact-form").serializeArray();
+		var yourval = jQuery.parseJSON(JSON.stringify(data));
+		//var values = Object.keys(obj).map(function (key) { return obj[key]; });
+		alert(yourval);
+		var csv='';
+		alert(Object.values(yourval));
+		for (var i = 0; i < data.length; i++) {
+          csv += data[i].name + ","+data[i].value;
+		  csv +="\r\n";
+		  }
+		  //var obj = JSON.parse(csv);
+		  alert(csv);
+  
+ 
+    console.log(csv);
+    var hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+    hiddenElement.target = '_blank';
+    hiddenElement.download = 'people.csv';
+    hiddenElement.click();
+}
+</script>
+	<form id="contact-form" action="#" method="POST">
+    <ol>
+      <li>
+       name
+        <div class="form-group">
+          <div class="input_fields_wrap1">
+            <input type="text" id="userName" name="userName" placeholder="" autofocus />
+            </div>
+          </div>
+        </li>
+        <br/>
+
+      <li>
+         like to read?
+        <div class="radio">
+          <label><input type="radio" name="readPref"  value="yes"> Yes</label>
+          <br/>
+          <label><input type="radio" name="readPref"  value="no"> No</label>
+          </div>
+        </li>
+        <br/>
+
+      <li> <!-- Question 3 fax to email -->
+        May we contact you?
+        <div class="radio">
+          <label><input type="radio" name="phone_to_email" value="yes"> Yes  (Please provide the phone number and/or email address)</label><br/><br/>
+          <div class="form-group">
+            <div class="input_fields_wrap2">
+              <input type="tel" id="tel_number" name="tel_number" placeholder="phone number">
+              <input type="email" id="email" name="email_address" placeholder="email address">
+              </div>
+            </div>
+            <label><input type="radio" name="phone_to_email" value="no"> No</label>
+          </div>
+        </li>
+        <br/>  <!-- end of question 3 -->
+
+      <div id="question5_6">
+        <li> <!-- Question 4 fax to email -->
+          <p><strong>What time zone are you in?</strong></p>
+          <div class="form-group">
+            <div class="input_fields_wrap3">
+              <select id="timeZone" name="timeZone">
+                <option value="">-- SELECT --</option>
+                <option value="Pacific">Pacific</option>
+                <option value="Mountain">Mountain</option>
+                <option value="Central">Central</option>
+                <option value="Eastern">Eastern</option>
+              </select>
+            </div>
+          </div>
+        </li>
+        <br/>  <!-- end of question 4 -->
+
+      </ol> <!-- end of ordered list -->
+
+    <div id="message"></div>
+
+    </form>
+
+  <button id="" type="button" class="btn btn-default" onclick="exportData()">Export</button>
+  
+  
+
+</html>
